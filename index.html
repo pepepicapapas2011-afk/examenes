@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía10 - Generador de Guías de Estudio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Barra de navegación -->
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>📚 Guía10</h1>
+                </div>
+                <button id="toggleTheme" class="theme-btn" title="Cambiar tema">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Página principal: Lista de guías -->
+        <section id="mainPage" class="page active">
+            <div class="container">
+                <div class="header-section">
+                    <h2>Mis Guías de Estudio</h2>
+                    <button id="createGuideBtn" class="btn btn-primary btn-large">
+                        + Crear Nueva Guía
+                    </button>
+                </div>
+
+                <div id="guidesList" class="guides-grid">
+                    <!-- Las guías se cargarán aquí -->
+                </div>
+
+                <div id="emptyState" class="empty-state">
+                    <p>📝 No tienes guías de estudio aún.</p>
+                    <p>¡Crea tu primera guía para comenzar a prepararte!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página: Crear/Editar Guía -->
+        <section id="createGuidePage" class="page">
+            <div class="container">
+                <button class="btn-back" id="backFromCreate">← Volver</button>
+                <div class="create-guide-content">
+                    <div class="form-section">
+                        <h2 id="createGuideTitle">Crear Nueva Guía</h2>
+
+                        <!-- Información básica -->
+                        <div class="form-group">
+                            <label for="guideName">Nombre de la Guía *</label>
+                            <input type="text" id="guideName" placeholder="Ej: Matemáticas - Ecuaciones">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="subject">Materia *</label>
+                                <input type="text" id="subject" placeholder="Ej: Matemáticas">
+                            </div>
+                            <div class="form-group">
+                                <label for="examDate">Fecha del Examen</label>
+                                <input type="date" id="examDate">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topics">Temas (separados por coma)</label>
+                            <input type="text" id="topics" placeholder="Ej: Ecuaciones lineales, Sistemas de ecuaciones">
+                        </div>
+
+                        <!-- Subir archivos -->
+                        <div class="form-section-title">
+                            <h3>Añadir Material de Estudio</h3>
+                        </div>
+
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📁</div>
+                            <p>Arrastra archivos aquí o haz clic para seleccionar</p>
+                            <small>PDF, Word, imágenes o pega texto directamente</small>
+                            <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.gif">
+                        </div>
+
+                        <div id="uploadedFiles" class="uploaded-files">
+                            <!-- Los archivos subidos aparecerán aquí -->
+                        </div>
+
+                        <!-- Área de texto para pegar apuntes -->
+                        <div class="form-group">
+                            <label for="notesText">O pega tus apuntes aquí:</label>
+                            <textarea id="notesText" placeholder="Pega tu contenido de texto, apuntes o notas..." rows="8"></textarea>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="form-actions">
+                            <button id="generateGuideBtn" class="btn btn-primary">Generar Guía</button>
+                            <button id="cancelCreateBtn" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página: Ver/Estudiar Guía -->
+        <section id="studyPage" class="page">
+            <div class="container">
+                <button class="btn-back" id="backFromStudy">← Volver</button>
+
+                <div class="study-header">
+                    <div class="guide-info">
+                        <h2 id="currentGuideName"></h2>
+                        <p id="guideMetadata" class="guide-meta"></p>
+                    </div>
+                    <div class="guide-actions">
+                        <button id="editGuideBtn" class="btn btn-secondary btn-sm">✏️ Editar</button>
+                        <button id="downloadPdfBtn" class="btn btn-secondary btn-sm">⬇️ Descargar PDF</button>
+                        <button id="deleteGuideBtn" class="btn btn-danger btn-sm">🗑️ Eliminar</button>
+                    </div>
+                </div>
+
+                <!-- Modos de estudio -->
+                <div class="study-modes">
+                    <button class="mode-btn active" data-mode="complete">
+                        <span class="mode-icon">📖</span>
+                        <span>Guía Completa</span>
+                    </button>
+                    <button class="mode-btn" data-mode="quick">
+                        <span class="mode-icon">⚡</span>
+                        <span>Repaso Rápido</span>
+                    </button>
+                    <button class="mode-btn" data-mode="thirty">
+                        <span class="mode-icon">⏱️</span>
+                        <span>30 Minutos</span>
+                    </button>
+                    <button class="mode-btn" data-mode="practice">
+                        <span class="mode-icon">✍️</span>
+                        <span>Examen Práctico</span>
+                    </button>
+                    <button class="mode-btn" data-mode="flashcards">
+                        <span class="mode-icon">🎴</span>
+                        <span>Tarjetas</span>
+                    </button>
+                </div>
+
+                <!-- Contenido de estudio -->
+                <div id="studyContent" class="study-content">
+                    <!-- El contenido se cargará según el modo seleccionado -->
+                </div>
+
+                <!-- Indicador de progreso -->
+                <div id="progressIndicator" class="progress-indicator" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de carga -->
+        <div id="loadingModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="spinner"></div>
+                <p id="loadingText">Generando tu guía...</p>
+            </div>
+        </div>
+
+        <!-- Modal de error -->
+        <div id="errorModal" class="modal hidden">
+            <div class="modal-content error-modal">
+                <h3>⚠️ Error</h3>
+                <p id="errorMessage"></p>
+                <div class="modal-actions">
+                    <button id="errorRetryBtn" class="btn btn-primary">Reintentar</button>
+                    <button id="errorCloseBtn" class="btn btn-secondary">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de configuración -->
+        <div id="settingsModal" class="modal hidden">
+            <div class="modal-content settings-modal">
+                <h3>⚙️ Configuración</h3>
+                <div class="settings-group">
+                    <label for="apiKeyInput">Clave de API de Claude:</label>
+                    <input type="password" id="apiKeyInput" placeholder="sk-ant-...">
+                    <small>Tu clave se guarda solo en tu navegador. Nunca se envía a servidores externos.</small>
+                </div>
+                <div class="modal-actions">
+                    <button id="saveSettingsBtn" class="btn btn-primary">Guardar</button>
+                    <button id="closeSettingsBtn" class="btn btn-secondary">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Librerías externas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- Scripts de la aplicación -->
+    <script src="utils.js"></script>
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
