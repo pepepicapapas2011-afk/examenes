@@ -1,0 +1,29 @@
+{
+  "name": "guia10",
+  "version": "1.0.0",
+  "description": "Generador de guías de estudio para preparatoria usando IA",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "educación",
+    "estudio",
+    "guías",
+    "preparatoria",
+    "IA",
+    "claude",
+    "antrophic"
+  ],
+  "author": "Tu nombre",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
