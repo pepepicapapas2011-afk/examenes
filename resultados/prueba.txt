@@ -1,3 +1,6 @@
 Prueba de Claude Code
 Fecha: Sun Oct  4 04:44:08 UTC 2026
 Entorno: nube (Ubuntu 24.04), carpeta /home/user/examenes/resultados
+
+Prueba ChatGPT (conector chat_gpt, modelo gpt-6-sol): OK
+Respuesta: "Conexión con OpenAI funcionando — 22 de febrero de 2026." (la fecha es incorrecta; el modelo no conoce la fecha real)

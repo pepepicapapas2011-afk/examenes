@@ -18,6 +18,10 @@
 - Al subir texto con acentos a Google Drive, usa `contentMimeType: "text/html; charset=UTF-8"`;
   con `text/plain` los acentos se corrompen.
 
+## Conectores
+- ChatGPT (`chat_gpt`): usarlo solo cuando el usuario lo pida; cada consulta gasta saldo de la API de OpenAI.
+  Comprobar primero con `estado_conector` (gratis). Enviar solo el contexto necesario. No conoce la fecha actual.
+
 ## Permisos
 - Pide autorización específica antes de: compras, enviar correos, publicar o compartir, borrados
   definitivos y cambios de seguridad.
