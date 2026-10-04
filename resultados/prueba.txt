@@ -1,0 +1,3 @@
+Prueba de Claude Code
+Fecha: Sun Oct  4 04:44:08 UTC 2026
+Entorno: nube (Ubuntu 24.04), carpeta /home/user/examenes/resultados
